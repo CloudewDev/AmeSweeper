@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Sprites/whiteBG.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/FogDark.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Tile.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/WatsonAmelia.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/KroniiFlag.png" type="Texture" id=5]
+[ext_resource path="res://neodgm.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="Tile" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Base" type="Sprite" parent="."]
+modulate = Color( 0.682353, 0.67451, 0.741176, 1 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Number" type="Label" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 2 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="Mine" type="Sprite" parent="."]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="Cover" type="Sprite" parent="."]
+modulate = Color( 0.909804, 0.768627, 0.556863, 1 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Flag" type="Sprite" parent="."]
+visible = false
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+
+[node name="Emphasize" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+show_behind_parent = true
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 16, 16 )
+shape = SubResource( 1 )
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
