@@ -5,40 +5,46 @@ var yPos = 0
 
 var isCursorOn = false
 var revealed = false
-var flagCnt = 0
-
-var life = 3
+var flaged = false
 
 var nearBombNum = 0 # 9 means mine
 
-signal my_nearBombNum(x, y, num)
+onready var Number = $Number
+onready var Mine = $Mine
+onready var Cover = $Cover
+onready var Flag = $Flag
+onready var Emphasize = $Emphasize
+onready var Base = $Base
 
-func _process(delta):
+signal my_nearBombNum(x, y, num)
+signal flag_result(result)
+
+func NumberSet():
 	if nearBombNum < 9:
 		if nearBombNum > 0:
-			$Number.text = String(nearBombNum)
-			$Mine.hide()
+			Number.text = String(nearBombNum)
+			Mine.hide()
 		else:
-			$Number.hide()
-			$Mine.hide()
+			Number.hide()
+			Mine.hide()
 	else:
-		$Number.hide()
+		Number.hide()
+	NumberColor()
 	
 func Reveal():
-	$Cover.hide()
+	Cover.hide()
 	revealed = true
 	
-	if nearBombNum == 9:
-		life == 0
-	
 func Flag():
-	$Flag.show()
-	$Cover.hide()
+	revealed = true
+	Flag.show()
+	Cover.hide()
 	if nearBombNum == 9:
-		flagCnt += 1
+		flaged = true
+		emit_signal("flag_result", true)
 	else:
-		life -= 1
-		$Flag.hide()
+		Flag.hide()
+		emit_signal("flag_result", false)
 	
 func _input(event):
 	if event is InputEventMouseButton and isCursorOn:
@@ -60,9 +66,28 @@ func CheckPatternColor(x, y):
 func _on_Area2D_mouse_entered():
 	if revealed == false:
 		isCursorOn = true
-		$Emphasize.self_modulate.a = 0.2
+		Emphasize.self_modulate.a = 0.2
 
 
 func _on_Area2D_mouse_exited():
 	isCursorOn = false
-	$Emphasize.self_modulate.a = 0
+	Emphasize.self_modulate.a = 0
+
+func NumberColor():
+	match nearBombNum:
+		1:
+			Number.self_modulate = Color(0.3, 0.3, 0.9)
+		2:
+			Number.self_modulate = Color(0.1, 0.5, 0.2)
+		3:
+			Number.self_modulate = Color(0.7, 0.2, 0.2)
+		4:
+			Number.self_modulate = Color(0.1, 0.1, 0.3)
+		5:
+			Number.self_modulate = Color(0.3, 0.2, 0)
+		6:
+			Number.self_modulate = Color(0, 0.6, 0.3)
+		7:
+			Number.self_modulate = Color(0, 0, 0)
+		8:
+			Number.self_modulate = Color(0.4, 0.4, 0.4)

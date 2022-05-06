@@ -1,8 +1,10 @@
 extends Node2D
 
-var width = 20
-var height = 16
-var bombCnt = 50
+var width = 30
+var height = 20
+var bombCnt = 100
+var leftBomb = 100
+var life = 3
 
 var tempBombCnt = 0
 
@@ -16,11 +18,6 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 	SetupBoard()
-	
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
 
 
 func SetupBoard():
@@ -37,6 +34,7 @@ func SetupBoard():
 			t.yPos = y
 			
 			t.connect("my_nearBombNum", self, "RevealAsManyAsPossible")
+			t.connect("flag_result", self, "FoundAme")
 			
 			add_child(t)
 			board[x].append(t)
@@ -45,7 +43,12 @@ func SetupBoard():
 		var randX = rng.randi_range(0, width - 1)
 		var randY = rng.randi_range(0, height - 1)
 		
+		while board[randX][randY].nearBombNum == 9:
+			randX = rng.randi_range(0, width - 1)
+			randY = rng.randi_range(0, height - 1)
+		
 		board[randX][randY].nearBombNum = 9
+		board[randX][randY].NumberSet()
 	
 	for x in width:
 		for y in height:
@@ -56,6 +59,7 @@ func SetupBoard():
 							tempBombCnt += 1
 			if board[x][y].nearBombNum != 9 :
 				board[x][y].nearBombNum = tempBombCnt
+				board[x][y].NumberSet()
 			tempBombCnt = 0
 			
 			
@@ -78,3 +82,9 @@ func RevealAsManyAsPossible(xPos, yPos, num):
 		var nextX = nextCoordinate.x
 		var nextY = nextCoordinate.y
 		RevealAsManyAsPossible(nextX, nextY, board[nextX][nextY].nearBombNum)
+		
+func FoundAme(result):
+	if result == true:
+		leftBomb -= 1
+	else:
+		life -= 1

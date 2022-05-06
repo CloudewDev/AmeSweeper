@@ -1,17 +1,76 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/whiteBG.png" type="Texture" id=2]
+[ext_resource path="res://pixelFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Scripts/GameManager.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/WatsonAmelia.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Kronii.png" type="Texture" id=6]
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-position = Vector2( 0, 48 )
+[node name="background" type="Sprite" parent="."]
+self_modulate = Color( 0.596078, 0.596078, 0.596078, 1 )
 scale = Vector2( 32, 30 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Board" type="Node2D" parent="."]
-position = Vector2( 16, 100 )
+[node name="TileGenerator" type="Node2D" parent="."]
+position = Vector2( 29, 129 )
 script = ExtResource( 1 )
+
+[node name="GameBoard" type="Sprite" parent="TileGenerator"]
+scale = Vector2( 30, 20 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Timer" type="Label" parent="."]
+self_modulate = Color( 0.309804, 0.345098, 0.65098, 1 )
+margin_left = 821.0
+margin_top = 32.0
+margin_right = 901.0
+margin_bottom = 66.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "00:00"
+align = 1
+valign = 1
+
+[node name="LifeLeft" type="Label" parent="."]
+self_modulate = Color( 0.309804, 0.345098, 0.65098, 1 )
+margin_left = 238.0
+margin_top = 34.0
+margin_right = 318.0
+margin_bottom = 68.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "3"
+align = 1
+valign = 1
+
+[node name="Sprite" type="Sprite" parent="LifeLeft"]
+position = Vector2( 10.5, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+flip_h = true
+
+[node name="MineLeft" type="Label" parent="."]
+self_modulate = Color( 0.984314, 0.913725, 0.301961, 1 )
+margin_left = 111.0
+margin_top = 35.0
+margin_right = 159.0
+margin_bottom = 69.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "100"
+
+[node name="Sprite" type="Sprite" parent="MineLeft"]
+position = Vector2( -20.9223, 15.4085 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 512, 400 )
+current = true

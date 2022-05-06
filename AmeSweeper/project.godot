@@ -13,6 +13,10 @@ config_version=4
 config/name="amesweeper"
 run/main_scene="res://Scenes/Main.tscn"
 
+[display]
+
+window/size/height=800
+
 [importer_defaults]
 
 texture={
