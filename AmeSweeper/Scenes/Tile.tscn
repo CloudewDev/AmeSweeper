@@ -4,7 +4,7 @@
 [ext_resource path="res://Sprites/FogDark.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Tile.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/WatsonAmelia.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/KroniiFlag.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/KroniJail.png" type="Texture" id=5]
 [ext_resource path="res://pixelFont.tres" type="DynamicFont" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]

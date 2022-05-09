@@ -18,25 +18,40 @@ onready var Base = $Base
 
 signal my_nearBombNum(x, y, num)
 signal flag_result(result)
+signal bomb
+
+func initialize():
+	revealed = false
+	flaged = false
+	nearBombNum = 0
+	Cover.show()
+	Flag.hide()
 
 func NumberSet():
 	if nearBombNum < 9:
 		if nearBombNum > 0:
+			Number.show()
 			Number.text = String(nearBombNum)
 			Mine.hide()
 		else:
 			Number.hide()
 			Mine.hide()
 	else:
+		Mine.show()
 		Number.hide()
 	NumberColor()
 	
 func Reveal():
+	Emphasize.self_modulate.a = 0
 	Cover.hide()
 	revealed = true
 	
+	if nearBombNum == 9:
+		emit_signal("bomb")
+	
 func Flag():
 	revealed = true
+	Emphasize.self_modulate.a = 0
 	Flag.show()
 	Cover.hide()
 	if nearBombNum == 9:
@@ -47,7 +62,7 @@ func Flag():
 		emit_signal("flag_result", false)
 	
 func _input(event):
-	if event is InputEventMouseButton and isCursorOn:
+	if event is InputEventMouseButton and isCursorOn and revealed == false:
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
 				Reveal()

@@ -12,13 +12,36 @@ var board = []
 
 var searchStack = []
 
+var ready = true
+var playing = false
+var gameOver = false
+
 var Tile = preload("res://Scenes/Tile.tscn")
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize()
 	SetupBoard()
+	SetTileProperty()
+	
+func _process(delta):
+	if life == 0:
+		for x in width:
+			for y in height:
+				if board[x][y].nearBombNum == 9:
+					board[x][y].Reveal()
 
+func Restart():
+	for x in width:
+		for y in height:
+			board[x][y].initialize()
+	SetTileProperty()
+	leftBomb = 100
+	life = 3
+	
+	ready = true
+	playing = false
+	gameOver = false
 
 func SetupBoard():
 	for x in width:
@@ -35,10 +58,12 @@ func SetupBoard():
 			
 			t.connect("my_nearBombNum", self, "RevealAsManyAsPossible")
 			t.connect("flag_result", self, "FoundAme")
-			
+			t.connect("bomb", self, "GameFail")
 			add_child(t)
 			board[x].append(t)
 			
+			
+func SetTileProperty():
 	for i in bombCnt:
 		var randX = rng.randi_range(0, width - 1)
 		var randY = rng.randi_range(0, height - 1)
@@ -61,9 +86,13 @@ func SetupBoard():
 				board[x][y].nearBombNum = tempBombCnt
 				board[x][y].NumberSet()
 			tempBombCnt = 0
-			
+	
 			
 func RevealAsManyAsPossible(xPos, yPos, num):
+	if ready == true:
+		playing = true
+		ready = false
+	
 	if num != 9:
 		board[xPos][yPos].Reveal()
 		if num == 0:
@@ -88,3 +117,9 @@ func FoundAme(result):
 		leftBomb -= 1
 	else:
 		life -= 1
+		
+func GameFail():
+	if gameOver == false:
+		life = 0
+		playing = false
+		gameOver = true

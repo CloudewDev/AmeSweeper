@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/whiteBG.png" type="Texture" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Scripts/GameManager.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/WatsonAmelia.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Kronii.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/WhiePanel.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/KroniiFlag.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Koolonii.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/CoolWatsonAmelia.png" type="Texture" id=10]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -49,7 +53,13 @@ text = "3"
 align = 1
 valign = 1
 
-[node name="Sprite" type="Sprite" parent="LifeLeft"]
+[node name="Koolonii" type="Sprite" parent="LifeLeft"]
+position = Vector2( 10.5, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 9 )
+flip_h = true
+
+[node name="Kronii" type="Sprite" parent="LifeLeft"]
 position = Vector2( 10.5, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
@@ -65,12 +75,37 @@ rect_scale = Vector2( 2, 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "100"
 
-[node name="Sprite" type="Sprite" parent="MineLeft"]
+[node name="CoolAme" type="Sprite" parent="MineLeft"]
+position = Vector2( -20.9223, 15.4085 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+flip_h = true
+
+[node name="Ame" type="Sprite" parent="MineLeft"]
 position = Vector2( -20.9223, 15.4085 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 flip_h = true
 
+[node name="Restart" type="TextureButton" parent="."]
+self_modulate = Color( 0.572549, 0.592157, 0.756863, 1 )
+margin_left = 458.0
+margin_top = 18.0
+margin_right = 554.0
+margin_bottom = 114.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 7 )
+expand = true
+
+[node name="Sprite" type="Sprite" parent="Restart"]
+position = Vector2( 45, 46 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 8 )
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 400 )
 current = true
+
+[connection signal="button_down" from="Restart" to="." method="_on_TextureButton_button_down"]
+[connection signal="button_up" from="Restart" to="." method="_on_TextureButton_button_up"]
