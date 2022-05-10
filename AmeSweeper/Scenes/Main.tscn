@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/whiteBG.png" type="Texture" id=2]
@@ -10,6 +10,25 @@
 [ext_resource path="res://Sprites/KroniiFlag.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Koolonii.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/CoolWatsonAmelia.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/AmeDance1.png" type="Texture" id=11]
+
+[sub_resource type="Animation" id=1]
+resource_name = "AmeDance1"
+length = 0.2
+loop = true
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -102,6 +121,24 @@ expand = true
 position = Vector2( 45, 46 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 8 )
+
+[node name="AmeBG" type="Sprite" parent="."]
+self_modulate = Color( 1, 0.905882, 0.686275, 1 )
+position = Vector2( 513, 986 )
+scale = Vector2( 37.5938, 10.4062 )
+texture = ExtResource( 2 )
+
+[node name="AmeDance" type="Sprite" parent="AmeBG"]
+position = Vector2( -0.239441, 0.384399 )
+scale = Vector2( 0.0266002, 0.0960961 )
+texture = ExtResource( 11 )
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AmeBG/AmeDance"]
+anims/AmeDance1 = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="AmeBG"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 400 )
