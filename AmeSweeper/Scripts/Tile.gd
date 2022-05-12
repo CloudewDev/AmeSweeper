@@ -13,6 +13,8 @@ var leftHold = false
 var rightHold = false
 var bothHold = false
 
+var allowInput = true
+
 var nearBombNum = 0 # 9 means mine
 
 onready var NumberNode = $Number
@@ -33,7 +35,7 @@ func _process(_delta):
 	else:
 		EmphasizeNode.self_modulate.a = 0
 		
-	if leftHold and rightHold and isCursorOn:
+	if leftHold and rightHold and isCursorOn and revealed:
 		emit_signal("open_near", xPos, yPos, nearBombNum)
 		bothHold = true
 	else:
@@ -82,7 +84,7 @@ func Flag():
 		emit_signal("flag_result", false)
 	
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and allowInput:
 		if revealed == false:
 			if isCursorOn:
 				if event.button_index == BUTTON_LEFT:
@@ -135,8 +137,13 @@ func NumberColor():
 		5:
 			NumberNode.self_modulate = Color(0.3, 0.2, 0)
 		6:
-			NumberNode.self_modulate = Color(0, 0.6, 0.3)
+			NumberNode.self_modulate = Color(0.1, 0.5, 0.5)
 		7:
 			NumberNode.self_modulate = Color(0, 0, 0)
 		8:
 			NumberNode.self_modulate = Color(0.4, 0.4, 0.4)
+
+func ProhibitInput():
+	allowInput = false
+func AllowInput():
+	allowInput = true

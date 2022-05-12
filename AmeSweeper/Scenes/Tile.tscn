@@ -19,7 +19,7 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="Number" type="Label" parent="."]
-self_modulate = Color( 0.431373, 0.431373, 0.431373, 1 )
+self_modulate = Color( 0, 0, 0, 1 )
 margin_right = 32.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 6 )

@@ -82,6 +82,7 @@ func SetupBoard():
 			t.connect("open_near", self, "OpenNear")
 			add_child(t)
 			board[x].append(t)
+			t.add_to_group("Tiles")
 			
 			
 func SetTileProperty():
@@ -121,10 +122,11 @@ func TwistTimeLine():
 	var tempCnt2 = 0
 	
 	while tempCnt2 < bombCnt - leftBomb:
-		randNum = rng.randi_range(0, bombCnt - leftBomb - 1)
+		randNum = rng.randi_range(0, bombCnt - leftBomb - tempCnt2 - 1)
 		
 		randX = bombList[randNum].x
 		randY = bombList[randNum].y
+		bombList.remove(randNum)
 		
 		board[randX][randY].revealed = true
 		board[randX][randY].CoverNode.hide()
@@ -179,10 +181,13 @@ func FoundAme(result):
 		life -= 1
 		
 func GameFail():
-	if gameOver == false:
-		life = 0
-		playing = false
-		gameOver = true
+	life = 0
+	playing = false
+	gameOver = true
+
+func GameSuccess():
+	playing = false
+	gameOver = true
 
 func OpenNear(x, y, num):
 	tempCnt1 = 0

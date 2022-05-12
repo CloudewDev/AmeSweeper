@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/KroniiFlag2.png-94fa78b941903a1513bb1140e80618a5.stex"
+path="res://.import/KroniiCheck.png-4774eb749fb568e0be262a9322b82e03.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/KroniiFlag2.png"
-dest_files=[ "res://.import/KroniiFlag2.png-94fa78b941903a1513bb1140e80618a5.stex" ]
+source_file="res://Sprites/KroniiCheck.png"
+dest_files=[ "res://.import/KroniiCheck.png-4774eb749fb568e0be262a9322b82e03.stex" ]
 
 [params]
 
