@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/whiteBG.png" type="Texture" id=2]
@@ -13,6 +13,21 @@
 [ext_resource path="res://Sprites/AmeDance1.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/AmeRun.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/KroniiCheck.png" type="Texture" id=13]
+[ext_resource path="res://Sounds/ame wryyyyy.mp3" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/ame Timemachine.mp3" type="AudioStream" id=15]
+[ext_resource path="res://Sounds/ame HIC 03.mp3" type="AudioStream" id=16]
+[ext_resource path="res://Sounds/ame HIC 04.mp3" type="AudioStream" id=17]
+[ext_resource path="res://Sounds/ame HIC 05.mp3" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/ame HIC 02.mp3" type="AudioStream" id=19]
+[ext_resource path="res://Sounds/Kronii GWAK 01.mp3" type="AudioStream" id=20]
+[ext_resource path="res://Sounds/ame HIC 01.mp3" type="AudioStream" id=21]
+[ext_resource path="res://Sounds/Kronii GWAK 02.mp3" type="AudioStream" id=22]
+[ext_resource path="res://Sounds/Kronii GWAK 03.mp3" type="AudioStream" id=23]
+[ext_resource path="res://Sounds/gura A4.mp3" type="AudioStream" id=24]
+[ext_resource path="res://Sounds/Kronii GWAK 04.mp3" type="AudioStream" id=25]
+[ext_resource path="res://Sounds/gura A3.mp3" type="AudioStream" id=26]
+[ext_resource path="res://Sounds/gura A2.mp3" type="AudioStream" id=27]
+[ext_resource path="res://Sounds/gura A.mp3" type="AudioStream" id=28]
 
 [sub_resource type="Animation" id=1]
 resource_name = "AmeDance1"
@@ -87,6 +102,61 @@ script = ExtResource( 1 )
 scale = Vector2( 30, 20 )
 texture = ExtResource( 2 )
 centered = false
+
+[node name="Audio" type="Node2D" parent="TileGenerator"]
+position = Vector2( -32, -144 )
+
+[node name="HIC1" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 21 )
+
+[node name="HIC2" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 19 )
+
+[node name="HIC3" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 16 )
+
+[node name="HIC4" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 17 )
+
+[node name="HIC5" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 18 )
+
+[node name="GWAK1" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 20 )
+volume_db = -5.673
+
+[node name="GWAK2" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 22 )
+volume_db = -5.673
+
+[node name="GWAK3" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 23 )
+volume_db = -5.673
+
+[node name="GWAK4" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 25 )
+volume_db = -5.673
+
+[node name="A1" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 28 )
+
+[node name="A2" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 27 )
+volume_db = 5.673
+
+[node name="A3" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 26 )
+volume_db = 5.673
+
+[node name="A4" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 24 )
+volume_db = 5.673
+
+[node name="WRY" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 14 )
+
+[node name="BRRRR" type="AudioStreamPlayer" parent="TileGenerator/Audio"]
+stream = ExtResource( 15 )
 
 [node name="Timer" type="Label" parent="."]
 self_modulate = Color( 0.0666667, 0.0862745, 0.262745, 1 )

@@ -8,6 +8,8 @@ onready var AmeDanceNode = $AmeBG
 onready var AmeDanceTween = $AmeBG/Tween
 onready var AmeRunNode = $AmeRun
 onready var AmeRunTween = $AmeRun/Tween
+onready var BRRRR = $TileGenerator/Audio/BRRRR
+onready var WRY = $TileGenerator/Audio/WRY
 
 var timeElapsed = 0
 var minute = 0
@@ -55,9 +57,9 @@ func _process(delta):
 		$LifeLeft/Kronii.show()
 		
 	if twistTimer > twistInterval:
+		twistTimer = 0
 		TwistTimeLineAnim()
 		TileGenerator.TwistTimeLine()
-		twistTimer = 0
 		twistInterval = rng.randi_range(15, 30)
 		
 	if TileGenerator.gameOver:
@@ -85,6 +87,7 @@ func TwistTimeLineAnim():
 			Tween.EASE_OUT_IN
 		)
 	AmeDanceTween.start()
+	BRRRR.play()
 
 func GameOverAnim():
 	AmeRunTween.interpolate_property(
@@ -92,11 +95,12 @@ func GameOverAnim():
 			"position", 
 			Vector2(-150, 400), 
 			Vector2(1150, 400), 
-			1.5, 
+			1.0, 
 			Tween.TRANS_SINE, 
 			Tween.EASE_IN_OUT
 		)
 	AmeRunTween.start()
+	WRY.play()
 	
 
 func _on_TextureButton_button_down():
@@ -114,8 +118,10 @@ func _on_TextureButton_button_up():
 
 func _on_Tween_tween_started(object, key):
 	get_tree().call_group("Tiles", "ProhibitInput")
+	get_tree().call_group("Tiles", "ProhibitPlaySound")
 
 func _on_Tween_tween_all_completed():
 	get_tree().call_group("Tiles", "AllowInput")
+	get_tree().call_group("Tiles", "AllowPlaySound")
 
 

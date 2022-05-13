@@ -25,6 +25,22 @@ var gameOver = false
 var Tile = preload("res://Scenes/Tile.tscn")
 var rng = RandomNumberGenerator.new()
 
+onready var HIC1 = $Audio/HIC1
+onready var HIC2 = $Audio/HIC2
+onready var HIC3 = $Audio/HIC3
+onready var HIC4 = $Audio/HIC4
+onready var HIC5 = $Audio/HIC5
+
+onready var GWAK1 = $Audio/GWAK1
+onready var GWAK2 = $Audio/GWAK2
+onready var GWAK3 = $Audio/GWAK3
+onready var GWAK4 = $Audio/GWAK4
+
+onready var A1 = $Audio/A1
+onready var A2 = $Audio/A2
+onready var A3 = $Audio/A3
+onready var A4 = $Audio/A4
+
 func _ready():
 	rng.randomize()
 	SetupBoard()
@@ -33,10 +49,12 @@ func _ready():
 func _process(_delta):
 	
 	if life == 0:
+		playing = false
+		gameOver = true
 		for x in width:
 			for y in height:
 				if board[x][y].nearBombNum == 9:
-					board[x][y].Reveal()
+					board[x][y].CoverNode.hide()
 					
 	for x in width:
 		for y in height:
@@ -80,6 +98,7 @@ func SetupBoard():
 			t.connect("flag_result", self, "FoundAme")
 			t.connect("bomb", self, "GameFail")
 			t.connect("open_near", self, "OpenNear")
+			t.connect("play_sound", self, "SoundManager")
 			add_child(t)
 			board[x].append(t)
 			t.add_to_group("Tiles")
@@ -151,12 +170,15 @@ func TwistTimeLine():
 		tempCnt2 += 1
 
 func RevealAsManyAsPossible(xPos, yPos, num):
+	
 	if ready == true:
 		playing = true
 		ready = false
 	
 	if num != 9:
-		board[xPos][yPos].Reveal()
+		board[xPos][yPos].emphasized = false
+		board[xPos][yPos].CoverNode.hide()
+		board[xPos][yPos].revealed = true
 		if num == 0:
 			for x in range(xPos - 1, xPos + 2):
 				for y in range( yPos - 1, yPos + 2):
@@ -177,6 +199,7 @@ func RevealAsManyAsPossible(xPos, yPos, num):
 func FoundAme(result):
 	if result == true:
 		leftBomb -= 1
+		
 	else:
 		life -= 1
 		
@@ -213,3 +236,37 @@ func OpenNear(x, y, num):
 							board[mapX][mapY].emphasized = true
 					else:
 						board[mapX][mapY].emphasized = false
+func SoundManager(name):
+	match (name):
+		"A":
+			match (rng.randi_range(1, 4)):
+				1:
+					A1.play()
+				2:
+					A2.play()
+				3:
+					A3.play()
+				4:
+					A4.play()
+		"HIC":
+			match (rng.randi_range(1, 5)):
+				1:
+					HIC1.play()
+				2:
+					HIC2.play()
+				3:
+					HIC3.play()
+				4:
+					HIC4.play()
+				5:
+					HIC5.play()
+		"GWAK":
+			match (rng.randi_range(1, 4)):
+				1:
+					GWAK1.play()
+				2:
+					GWAK2.play()
+				3:
+					GWAK3.play()
+				4:
+					GWAK4.play()

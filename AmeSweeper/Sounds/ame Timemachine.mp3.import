@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ame Timemachine.mp3-d7546ce5412753f60ba0601648a69a88.mp3str"
+
+[deps]
+
+source_file="res://Sounds/ame Timemachine.mp3"
+dest_files=[ "res://.import/ame Timemachine.mp3-d7546ce5412753f60ba0601648a69a88.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

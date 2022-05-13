@@ -15,6 +15,8 @@ var bothHold = false
 
 var allowInput = true
 
+var allowPlaySound = true
+
 var nearBombNum = 0 # 9 means mine
 
 onready var NumberNode = $Number
@@ -28,6 +30,7 @@ signal my_nearBombNum(x, y, num)
 signal flag_result(result)
 signal bomb
 signal open_near(x, y, num)
+signal play_sound(name)
 
 func _process(_delta):
 	if emphasized == true:
@@ -69,6 +72,10 @@ func Reveal():
 	
 	if nearBombNum == 9:
 		emit_signal("bomb")
+		emit_signal("play_sound", "GWAK")
+	else:
+		if allowPlaySound == true:
+			emit_signal("play_sound", "A")
 	
 func Flag():
 	emphasized = false
@@ -78,10 +85,12 @@ func Flag():
 		FlagNode.show()
 		flaged = true
 		emit_signal("flag_result", true)
+		emit_signal("play_sound", "HIC")
 	else:
 		CoverNode.hide()
 		emit_signal("my_nearBombNum", xPos, yPos, nearBombNum)
 		emit_signal("flag_result", false)
+		emit_signal("play_sound", "GWAK")
 	
 func _input(event):
 	if event is InputEventMouseButton and allowInput:
@@ -91,7 +100,6 @@ func _input(event):
 					if event.pressed:
 						Reveal()
 						emit_signal("my_nearBombNum", xPos, yPos, nearBombNum)
-				
 				if event.button_index == BUTTON_RIGHT:
 					if event.pressed:
 						Flag()
@@ -147,3 +155,8 @@ func ProhibitInput():
 	allowInput = false
 func AllowInput():
 	allowInput = true
+
+func AllowPlaySound():
+	allowPlaySound = true
+func ProhibitPlaySound():
+	allowPlaySound = false

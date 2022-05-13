@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Kronii GWAK 01.mp3-f4d08b08452091523fd079e0b6bc9364.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Kronii GWAK 01.mp3"
+dest_files=[ "res://.import/Kronii GWAK 01.mp3-f4d08b08452091523fd079e0b6bc9364.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

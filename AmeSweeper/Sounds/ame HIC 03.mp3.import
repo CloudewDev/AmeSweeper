@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ame HIC 03.mp3-b8a33fd988febf1352610150e1eed9e0.mp3str"
+
+[deps]
+
+source_file="res://Sounds/ame HIC 03.mp3"
+dest_files=[ "res://.import/ame HIC 03.mp3-b8a33fd988febf1352610150e1eed9e0.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
