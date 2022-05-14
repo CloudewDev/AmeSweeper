@@ -27,6 +27,8 @@ func _ready():
 	$AmeRun/AnimationPlayer.play("AmeRun")
 	rng.randomize()
 	
+	$BGM.play()
+	
 	twistInterval = rng.randi_range(15, 30)
 
 func _process(delta):
@@ -70,12 +72,6 @@ func _process(delta):
 	if TileGenerator.leftBomb == 0:
 		TileGenerator.GameSuccess()
 
-func _input(event):
-	if event is InputEventKey and event.scancode == KEY_R:
-		if event.pressed:
-			TileGenerator.TwistTimeLine()
-			TwistTimeLineAnim()
-
 func TwistTimeLineAnim():
 	AmeDanceTween.interpolate_property(
 			AmeDanceNode, 
@@ -118,10 +114,8 @@ func _on_TextureButton_button_up():
 
 func _on_Tween_tween_started(object, key):
 	get_tree().call_group("Tiles", "ProhibitInput")
-	get_tree().call_group("Tiles", "ProhibitPlaySound")
 
 func _on_Tween_tween_all_completed():
 	get_tree().call_group("Tiles", "AllowInput")
-	get_tree().call_group("Tiles", "AllowPlaySound")
 
 

@@ -68,6 +68,16 @@ func _process(_delta):
 							board[x2][y2].emphasized = false
 			if board[x][y].isCursorOn == false:
 				board[x][y].emphasized = false
+				
+func _input(event):
+	if event is InputEventKey and event.scancode == KEY_R:
+		if event.pressed:
+			for x in width:
+				for y in height:
+					if board[x][y].nearBombNum == 9:
+						board[x][y].Flag()
+					else:
+						board[x][y].Reveal()
 
 func Restart():
 	for x in width:
@@ -162,8 +172,8 @@ func TwistTimeLine():
 						
 						if rng.randf() < 0.5:
 							if board[x][y].nearBombNum != 9:
-								board[x][y].Reveal()
-								OpenNear(x, y, board[x][y].nearBombNum)
+								board[x][y].JustShow()
+								OpenNear(x, y, board[x][y].nearBombNum, false)
 								tempCnt3 += 1
 							else:
 								tempCnt3 += 1
@@ -185,7 +195,7 @@ func RevealAsManyAsPossible(xPos, yPos, num):
 					if x >= 0 and x < width and y >= 0 and y < height:
 					
 						if board[x][y].nearBombNum != 9 and board[x][y].revealed == false:
-							board[x][y].Reveal()
+							board[x][y].JustShow()
 						
 							if board[x][y].nearBombNum == 0:
 								searchStack.append(Vector2(x, y))
@@ -212,7 +222,7 @@ func GameSuccess():
 	playing = false
 	gameOver = true
 
-func OpenNear(x, y, num):
+func OpenNear(x, y, num , click):
 	tempCnt1 = 0
 	for nearX in range (x-1, x+2):
 		for nearY in range(y-1, y+2):
@@ -224,7 +234,10 @@ func OpenNear(x, y, num):
 			for nearY in range(y-1, y+2):
 				if nearX >= 0 and nearX < width and nearY >= 0 and nearY < height:
 					if board[nearX][nearY].revealed == false:
-						board[nearX][nearY].Reveal()
+						if click:
+							board[nearX][nearY].Reveal()
+						else:
+							board[nearX][nearY].JustShow()
 						if board[nearX][nearY].nearBombNum == 0:
 							RevealAsManyAsPossible(nearX, nearY, 0)
 	else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/whiteBG.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Sounds/gura A3.mp3" type="AudioStream" id=26]
 [ext_resource path="res://Sounds/gura A2.mp3" type="AudioStream" id=27]
 [ext_resource path="res://Sounds/gura A.mp3" type="AudioStream" id=28]
+[ext_resource path="res://Sounds/Somebody.mp3" type="AudioStream" id=29]
 
 [sub_resource type="Animation" id=1]
 resource_name = "AmeDance1"
@@ -262,6 +263,10 @@ frame = 6
 anims/AmeRun = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="AmeRun"]
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 29 )
+volume_db = -7.575
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 400 )

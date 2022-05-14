@@ -39,7 +39,7 @@ func _process(_delta):
 		EmphasizeNode.self_modulate.a = 0
 		
 	if leftHold and rightHold and isCursorOn and revealed:
-		emit_signal("open_near", xPos, yPos, nearBombNum)
+		emit_signal("open_near", xPos, yPos, nearBombNum, true)
 		bothHold = true
 	else:
 		bothHold = false
@@ -65,6 +65,11 @@ func NumberSet():
 		NumberNode.hide()
 	NumberColor()
 	
+func JustShow():
+	emphasized = false
+	CoverNode.hide()
+	revealed = true
+	
 func Reveal():
 	emphasized = false
 	CoverNode.hide()
@@ -74,8 +79,7 @@ func Reveal():
 		emit_signal("bomb")
 		emit_signal("play_sound", "GWAK")
 	else:
-		if allowPlaySound == true:
-			emit_signal("play_sound", "A")
+		emit_signal("play_sound", "A")
 	
 func Flag():
 	emphasized = false
@@ -155,8 +159,3 @@ func ProhibitInput():
 	allowInput = false
 func AllowInput():
 	allowInput = true
-
-func AllowPlaySound():
-	allowPlaySound = true
-func ProhibitPlaySound():
-	allowPlaySound = false
