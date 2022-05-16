@@ -68,16 +68,6 @@ func _process(_delta):
 							board[x2][y2].emphasized = false
 			if board[x][y].isCursorOn == false:
 				board[x][y].emphasized = false
-				
-func _input(event):
-	if event is InputEventKey and event.scancode == KEY_R:
-		if event.pressed:
-			for x in width:
-				for y in height:
-					if board[x][y].nearBombNum == 9:
-						board[x][y].Flag()
-					else:
-						board[x][y].Reveal()
 
 func Restart():
 	for x in width:

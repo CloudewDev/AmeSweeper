@@ -59,10 +59,11 @@ func _process(delta):
 		$LifeLeft/Kronii.show()
 		
 	if twistTimer > twistInterval:
-		twistTimer = 0
 		TwistTimeLineAnim()
-		TileGenerator.TwistTimeLine()
-		twistInterval = rng.randi_range(15, 30)
+		if twistTimer > twistInterval + 0.1:
+			TileGenerator.TwistTimeLine()
+			twistInterval = rng.randi_range(15, 30)
+			twistTimer = 0
 		
 	if TileGenerator.gameOver:
 		get_tree().call_group("Tiles", "ProhibitInput")

@@ -18,6 +18,8 @@ boot_splash/bg_color=Color( 0, 0, 0, 1 )
 [display]
 
 window/size/height=800
+window/size/resizable=false
+window/stretch/aspect="keep"
 
 [importer_defaults]
 
